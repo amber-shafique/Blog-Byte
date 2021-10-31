@@ -7,12 +7,15 @@ const cors= require('cors');
 const mongoose=require('mongoose');
 require('dotenv').config();
 
+//bring routes
+const blogRoutes= require('./routes/blog')
+
 //App
 const app=express() ;
 
 //DB
     mongoose
-    .connect(process.env.DATABASE, {
+    .connect(process.env.DATABASE_LOCAL, {
         useNewUrlParser: true, 
         useUnifiedTopology: true     })
         
@@ -23,6 +26,9 @@ const app=express() ;
 app.use(morgan('dev'));;
 app.use(bodyParser.json());
 app.use(cookieParser());
+//routes middleware
+app.use('/api',blogRoutes)
+
 
 //cors
 
@@ -32,12 +38,6 @@ if(process.env.NODE_ENV === 'development'){
 
 }
 
-//routes
- 
-app.get('/api',(req,res)=>{
-
-    res.json({time: Date().toString()});
-})
 
 //port
 
