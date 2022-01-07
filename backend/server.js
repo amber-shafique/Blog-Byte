@@ -9,13 +9,14 @@ require('dotenv').config();
 
 //bring routes
 const blogRoutes= require('./routes/blog')
+const authRoutes= require('./routes/auth')
 
 //App
 const app=express() ;
 
 //DB
     mongoose
-    .connect(process.env.DATABASE_LOCAL, {
+    .connect(process.env.DATABASE_CLOUD, {
         useNewUrlParser: true, 
         useUnifiedTopology: true     })
         
@@ -26,12 +27,13 @@ const app=express() ;
 app.use(morgan('dev'));;
 app.use(bodyParser.json());
 app.use(cookieParser());
+
 //routes middleware
 app.use('/api',blogRoutes)
+app.use('/api',authRoutes)
 
 
 //cors
-
 if(process.env.NODE_ENV === 'development'){
 
     app.use(cors({origin: `$(process.env.CLIENT_URL)`}));
@@ -40,7 +42,6 @@ if(process.env.NODE_ENV === 'development'){
 
 
 //port
-
 const port=process.env.PORT || 8000
 app.listen(port, ()=>{
 
