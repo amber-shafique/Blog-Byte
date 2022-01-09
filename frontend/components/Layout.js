@@ -1,15 +1,15 @@
-import Header from './Header'
+import Header from "./Header";
+import { Fragment, default as React } from "react";
 
-import { Fragment, default as React } from 'react'
-const Layout=({children})=>{
 
-    return (
-        <Fragment>
-            <Header/>
-         
-                {children}
-            <p>Footer</p>
-        </Fragment>
-    ) 
-}
-export default Layout; 
+const Layout = ({ children }) => {
+  return (
+    <Fragment>
+      <Header />
+      {children}
+      <p>footer</p>
+    </Fragment>
+  );
+};
+
+export default Layout;
