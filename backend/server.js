@@ -7,10 +7,6 @@ const cors= require('cors');
 const mongoose=require('mongoose');
 require('dotenv').config();
 
-//bring routes
-const blogRoutes= require('./routes/blog')
-const authRoutes= require('./routes/auth')
-
 //App
 const app=express() ;
 
@@ -25,20 +21,25 @@ const app=express() ;
 
 //middlewares
 app.use(morgan('dev'));;
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
 
-//routes middleware
-app.use('/api',blogRoutes)
-app.use('/api',authRoutes)
 
+// app.use(cors(corsOptions)) // Use this after the variable declaration
 
 //cors
 if(process.env.NODE_ENV === 'development'){
-
-    app.use(cors({origin: `$(process.env.CLIENT_URL)`}));
-
+    // console.log(process.env.CLIENT_URL);
+    app.use(cors({origin: `${process.env.CLIENT_URL}`}));
 }
+
+//bring routes
+const blogRoutes= require('./routes/blog')
+const authRoutes= require('./routes/auth')
+//routes middleware
+app.use('/api',blogRoutes)
+app.use('/api',authRoutes)
+// app.use('/',authRoutes)
 
 
 //port

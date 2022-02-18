@@ -35,7 +35,7 @@ exports.signup=(req,res)=>{
             // })
 
             res.json({
-                mesaage:'Signup success! Please Signin '
+                message:'Signup success! Please Signin '
             })
         })
     })
