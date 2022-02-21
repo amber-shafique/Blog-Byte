@@ -1,9 +1,8 @@
-import React, { Fragment,useState } from "react";
+import React, { Fragment,useState,useEffect } from "react";
 import { APP_NAME } from "../config";
 import Link from "next/link";
 import Router from "next/router";
 import { signout, isAuth } from "../actions/auth";
-
 import {
   Collapse,
   Navbar,
@@ -12,11 +11,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
 } from "reactstrap";
 
 const Header = () => {
@@ -29,8 +23,10 @@ const Header = () => {
     <div>
       <Navbar color="light" light expand="md">
         {/* LOGO */}
+        <Link href="/">
         <img src="static/images/blog.png" width="50" height="50" />
-
+        </Link>
+        
         <Link href="/">
           <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
         </Link>
@@ -48,10 +44,30 @@ const Header = () => {
 
                 <NavItem>
                   <Link href="/signup">
-                    <NavLink>Signup</NavLink>
+                    <NavLink >Signup</NavLink>
                   </Link>
                 </NavItem>
               </Fragment>
+            )}
+
+            {isAuth() && isAuth().role==0 &&(
+              <NavItem>
+                <Link href="/user">
+                    <NavLink >
+                      {`${isAuth().name}'s Dashboard`}
+                    </NavLink>
+                </Link>
+              </NavItem>
+            )}
+
+            {isAuth() && isAuth().role==1 &&( 
+              <NavItem>
+                <Link href="/admin">
+                    <NavLink >
+                      {`${isAuth().name}'s Dashboard`}
+                    </NavLink>
+                </Link>
+              </NavItem>
             )}
 
             {isAuth() && (

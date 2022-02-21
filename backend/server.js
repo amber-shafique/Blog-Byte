@@ -36,10 +36,13 @@ if(process.env.NODE_ENV === 'development'){
 //bring routes
 const blogRoutes= require('./routes/blog')
 const authRoutes= require('./routes/auth')
+const userRoutes= require('./routes/user')
+
+
 //routes middleware
 app.use('/api',blogRoutes)
 app.use('/api',authRoutes)
-// app.use('/',authRoutes)
+app.use('/api',userRoutes) 
 
 
 //port

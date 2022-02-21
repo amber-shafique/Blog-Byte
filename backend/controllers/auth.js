@@ -3,13 +3,8 @@ const shortId=require('shortid')
 const jwt=require('jsonwebtoken')
 const expressJwt=require('express-jwt')
 
+
 exports.signup=(req,res)=>{
-
-    // const{name,email,password}=req.body
-
-    // res.json({
-    //     user:{name,email,password}
-    // });
 
     User.findOne({email:req.body.email}).exec((err,user)=>{
 
@@ -87,3 +82,53 @@ exports.requireSignin = expressJwt({
     secret: process.env.JWT_SECRET, 
     algorithms: ['sha1', 'RS256', 'HS256']
 });
+
+
+//user middleware
+exports.authMiddleware=(req,res,next)=>{
+
+    const authUserId=req.user._id
+    User.findById({_id:authUserId}).exec((err,user)=>{
+        if(err|| !user){
+            return res.status(400).json({
+                error: "User not found"
+            })
+        }
+        req.profile=user
+        next()
+    })
+}
+//admin middleware
+exports.adminMiddleware=(req,res,next)=>{
+
+    const adminUserId=req.user._id
+    User.findById({_id:adminUserId}).exec((err,user)=>{
+        if(err|| !user){
+            return res.status(400).json({
+                error: "User not found"
+            })
+        }
+        if(user.role!== 1){
+            return res.status(400).json({
+                error: "Admin resource. Access Denied"
+            })
+        }
+        req.profile=user
+        next()
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

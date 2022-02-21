@@ -18,8 +18,8 @@ const SigninComponent = () => {
   const { email, password, error, loading, message, showForm } = values;
 
   useEffect(()=>{
-    isAuth () && Router.push('/');
-  },[])
+    isAuth () && Router.push(`/`);
+  },[]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,12 +36,16 @@ const SigninComponent = () => {
             //save user info to localstore
             //authenticate user
             authenticate(data,()=>{
-                Router.push('/')
-            })
-          
-        }
-    });
 
+              if (isAuth() && isAuth().role === 1) {
+                Router.push(`/admin`);
+            } else {
+                Router.push(`/user`);
+            }
+               
+            });
+        };
+    });
 };
   const handleChange = name=>(e) => {
     setValues({...values,error:false,[name]:e.target.value})
