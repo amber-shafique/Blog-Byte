@@ -1,7 +1,6 @@
 import Header from "./Header";
 import { Fragment, default as React } from "react";
-import SignupComponent from "./auth/SignupComponent";
-
+import Footer from "../pages/Footer";
 
 const Layout = ({ children }) => {
   return (
@@ -9,7 +8,7 @@ const Layout = ({ children }) => {
       <Header />
 
       {children}
-    
+      <Footer/>
     </Fragment>
   );
 };

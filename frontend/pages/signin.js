@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import SigninComponent from "../components/auth/SigninComponent";
+import Footer from "./Footer";
 
 const Signin = () => {
   return (
@@ -11,7 +12,10 @@ const Signin = () => {
           <SigninComponent />
         </div>
       </div>
+   
+     
     </Layout>
+    
   );
 };
 

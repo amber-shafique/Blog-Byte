@@ -2,16 +2,22 @@ import React, { Fragment,useState,useEffect } from "react";
 import { APP_NAME } from "../config";
 import Link from "next/link";
 import Router from "next/router";
+import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
 import {
-  Collapse,
+  Collapse, 
   Navbar,
   NavbarToggler,
-  NavbarBrand,
-  Nav,
+  Nav, 
   NavItem,
   NavLink,
 } from "reactstrap";
+import '.././node_modules/nprogress/nprogress.css'
+
+  Router.onRouteChangeStart=url=>NProgress.start();
+  Router.onRouteChangeComplete=url=>NProgress.done();
+  Router.onRouteChangeError=url=>NProgress.done();
+
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +27,7 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="dark" dark expand="md" >
         {/* LOGO */}
         <Link href="/">
         <img src="static/images/blog.png" width="50" height="50" />

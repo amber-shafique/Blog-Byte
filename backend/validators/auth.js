@@ -14,7 +14,7 @@
     check('password')
         .isLength({min:6})
         .withMessage('Password must be atleast 6 characters long'),
- ]
+ ];
 
  exports.userSigninValidator=[
 
