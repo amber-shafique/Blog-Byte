@@ -2,6 +2,7 @@ import { Fragment, default as React } from "react";
 import { useState ,useEffect} from "react";
 import { signup,isAuth } from "../../actions/auth";
 import Router from "next/router";
+import Link from "next/link";
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
@@ -67,7 +68,7 @@ const SignupComponent = () => {
             onChange={handleChange('name')}
             type="text"
             className="form-control"
-            placeholder="Type your name"
+            placeholder="Enter your name"
           />
         </div>
         <div className="form-group">
@@ -76,7 +77,7 @@ const SignupComponent = () => {
             onChange={handleChange('email')} 
             type="email"
             className="form-control"
-            placeholder="Type your email"
+            placeholder="Email address"
           />
         </div>
 
@@ -86,13 +87,19 @@ const SignupComponent = () => {
             onChange={handleChange('password')}
             type="password"
             className="form-control"
-            placeholder="Type your password"
+            placeholder="Password"
           />
         </div>
-
+      
         <div>
           <button className="btn btn-primary">Signup</button>
         </div>
+        <div>
+        <Link href="/signin">
+          <a>Already have an account? Signin!</a>
+        </Link>
+        </div>
+       
       </form>
     );
   };
